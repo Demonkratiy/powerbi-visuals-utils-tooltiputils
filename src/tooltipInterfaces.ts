@@ -24,6 +24,7 @@
  *  THE SOFTWARE.
  */
 import powerbi from "powerbi-visuals-api";
+import { ContainerElement } from "d3-selection";
 import ITooltipService = powerbi.extensibility.ITooltipService;
 
 export interface TooltipEventArgs<TData> {
@@ -41,6 +42,7 @@ export interface ITooltipServiceWrapper {
         getDataPointIdentity?: (args: TooltipEventArgs<T>) => powerbi.visuals.ISelectionId,
         reloadTooltipDataOnMouseMove?: boolean): void;
     hide(): void;
+    cancelTouchTimeoutEvents(): void;
 }
 
 export interface TooltipEnabledDataPoint {
@@ -50,7 +52,7 @@ export interface TooltipEnabledDataPoint {
 
 export interface TooltipServiceWrapperOptions {
     tooltipService: ITooltipService;
-    rootElement: Element;
-    handleTouchDelay: number;
+    rootElement: ContainerElement;
+    handleTouchDelay?: number;
     getEventMethod?: () => MouseEvent;
 }
